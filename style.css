@@ -1,0 +1,844 @@
+/* ============================================
+   RESET & BASE STYLES
+   ============================================ */
+   * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; /* Account for fixed navbar */
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 400;
+    color: #2c2c2c;
+    line-height: 1.6;
+    overflow-x: hidden;
+    background-image: url('images/backround.jpg'); /* Will fix below if needed */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 100%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* ============================================
+   NAVIGATION BAR
+   ============================================ */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo-link {
+    position: absolute;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.nav-logo {
+    height: 70px;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1rem;
+    position: relative;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #d4af37, #b8941f);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #d4af37;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Hamburger Menu (Mobile) */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #ffffff;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('images/backround.jpg'); /* Will fix below if needed */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 0;
+    padding-top: 80px; /* Account for fixed navbar */
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeInUp 1s ease-out;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.hero-logo {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 2rem;
+    filter: drop-shadow(0 10px 30px rgba(255, 255, 255, 0.3));
+    padding: 0 1rem;
+}
+
+/* Large Desktop Styles */
+@media (min-width: 1400px) {
+    .hero-logo {
+        max-width: 320px;
+    }
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: 1px;
+}
+
+.hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #d4af37;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    color: #f5f5f5;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    color: #ffffff;
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.scroll-indicator:hover {
+    color: #d4af37;
+}
+
+/* ============================================
+   WHY CHOOSE US SECTION
+   ============================================ */
+.why-choose-us-section {
+    position: relative;
+    min-height: 100vh;
+    padding: 150px 0 100px 0;
+    background: transparent;
+    z-index: 1;
+    scroll-margin-top: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 4rem;
+    position: relative;
+    padding-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #d4af37, #b8941f);
+}
+
+.why-choose-us-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.content-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.content-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+}
+
+.brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
+}
+
+.content-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #f5f5f5;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.content-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    color: #ffffff;
+    line-height: 1.6;
+    padding-top: 2rem;
+    border-top: 2px solid #d4af37;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+.gallery-section {
+    position: relative;
+    min-height: 100vh;
+    padding: 150px 0 100px 0;
+    background: transparent;
+    z-index: 1;
+    scroll-margin-top: 100px;
+}
+
+.gemstone-group {
+    margin-bottom: 5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.gemstone-group:last-child {
+    margin-bottom: 0;
+}
+
+.gemstone-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.gemstone-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, #d4af37, #b8941f);
+}
+
+.gemstone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+    justify-items: center;
+}
+
+/* Center single items in grid - Modern browsers */
+.gemstone-grid:has(.gemstone-item:only-child) {
+    justify-content: center;
+    grid-template-columns: minmax(250px, max-content);
+}
+
+/* Fallback for browsers without :has() support - centers single items */
+.gemstone-item:only-child {
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.gemstone-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+    max-width: 100%;
+}
+
+.gemstone-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gemstone-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    padding: 0;
+    transition: transform 0.3s ease;
+}
+
+.gemstone-item:hover .gemstone-image {
+    transform: scale(1.05);
+}
+
+.gemstone-description {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #f5f5f5;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Firoza (Turquoise) - Smaller Size */
+.firoza-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+}
+
+.firoza-item {
+    max-width: 300px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.firoza-image {
+    max-width: 100%;
+    height: auto;
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+.contact-section {
+    position: relative;
+    min-height: 100vh;
+    padding: 150px 0 100px 0;
+    background: transparent;
+    color: #ffffff;
+    z-index: 1;
+    scroll-margin-top: 100px;
+    display: flex;
+    align-items: center;
+}
+
+.contact-section .section-title {
+    color: #ffffff;
+}
+
+.contact-section .section-title::after {
+    background: linear-gradient(90deg, #d4af37, #b8941f);
+}
+
+.contact-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #d4af37;
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.3s ease;
+    min-width: 180px;
+}
+
+.social-link:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #d4af37;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.social-link i {
+    font-size: 3rem;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover i {
+    transform: scale(1.2);
+}
+
+.social-link.whatsapp:hover {
+    color: #25D366;
+}
+
+.social-link.instagram:hover {
+    color: #E4405F;
+}
+
+.social-link span {
+    font-weight: 500;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    color: #ffffff;
+    padding: 2rem 0;
+    text-align: center;
+    z-index: 1;
+    margin-top: 0;
+}
+
+.footer p {
+    font-size: 0.9rem;
+    color: #999;
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet Styles */
+@media (max-width: 968px) {
+    .hero-logo {
+        max-width: 240px;
+        padding: 0 1rem;
+    }
+
+    .hero-content {
+        padding: 1.5rem;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .gemstone-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .social-icons {
+        gap: 2rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        width: 100%;
+        text-align: center;
+        transition: left 0.3s ease;
+        box-shadow: 0 10px 27px rgba(0, 0, 0, 0.3);
+        padding: 2rem 0;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        left: 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+        padding: 1rem 0;
+    }
+
+    .nav-link {
+        display: block;
+        width: 100%;
+    }
+
+    .nav-container {
+        padding: 1rem 1.5rem;
+        justify-content: space-between;
+    }
+
+    .logo-link {
+        position: relative;
+        left: auto;
+    }
+
+    .nav-logo {
+        height: 55px;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+
+    .hero-description {
+        font-size: 0.9rem;
+    }
+
+    .hero-logo {
+        max-width: 200px;
+        padding: 0 0.5rem;
+    }
+
+    .hero-content {
+        padding: 1rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .content-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .brand-name {
+        font-size: 2rem;
+    }
+
+    .content-text {
+        font-size: 1rem;
+    }
+
+    .content-quote {
+        font-size: 1.2rem;
+    }
+
+    .gemstone-title {
+        font-size: 2rem;
+    }
+
+    .gemstone-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+    }
+
+    .gemstone-description {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+
+    .firoza-grid {
+        max-width: 300px;
+    }
+
+    .firoza-item {
+        max-width: 250px;
+    }
+
+    .social-icons {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .social-link {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .why-choose-us-section,
+    .gallery-section,
+    .contact-section {
+        min-height: auto;
+        padding: 120px 0 60px 0;
+        scroll-margin-top: 80px;
+    }
+    
+    .why-choose-us-section,
+    .contact-section {
+        display: block;
+    }
+    
+    .hero-section {
+        padding-top: 70px;
+    }
+
+    .container {
+        padding: 0 1rem;
+    }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+    .nav-logo {
+        height: 50px;
+    }
+
+    .hero-logo {
+        max-width: 160px;
+        padding: 0 0.5rem;
+    }
+
+    .hero-content {
+        padding: 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 1.7rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .section-title {
+        font-size: 1.7rem;
+    }
+
+    .gemstone-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-card {
+        padding: 1.5rem 1rem;
+    }
+}
