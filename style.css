@@ -94,11 +94,12 @@ body::before {
     inset: 0;
     background: linear-gradient(
         135deg,
-        rgba(0, 0, 0, 0.4) 0%,
-        rgba(0, 0, 0, 0.6) 100%
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.35)
     );
     z-index: 0;
 }
+
 
 .hero-content {
     position: relative;
@@ -772,3 +773,4 @@ body::before {
         padding: 1.5rem 1rem;
     }
 }
+
